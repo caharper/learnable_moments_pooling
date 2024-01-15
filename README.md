@@ -6,32 +6,16 @@ This is the code for the paper , accepted at ICASSP 2024. This work enables the 
 
 <!-- <!DOCTYPE html> -->
 <html>
-<head>
-<style>
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th, td {
-    border: 1px solid black;
-    text-align: left;
-    padding: 8px;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-</style>
-</head>
 <body>
 
 <table>
   <tr style="border-bottom: 2pt solid black;">
-    <th>Type</th>
-    <th>Statistics</th>
-    <th>Shared Weights</th>
-    <th>Test Accuracy (%)</th>
-    <th>Peak Accuracy (%)</th>
-    <th># Params (K)</th>
+    <th style="background-color: #f2f2f2;">Type</th>
+    <th style="background-color: #f2f2f2;">Statistics</th>
+    <th style="background-color: #f2f2f2;">Shared Weights</th>
+    <th style="background-color: #f2f2f2;">Test Accuracy (%)</th>
+    <th style="background-color: #f2f2f2;">Peak Accuracy (%)</th>
+    <th style="background-color: #f2f2f2;"># Params (K)</th>
   </tr>
 
   <tr>
