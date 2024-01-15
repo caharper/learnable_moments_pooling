@@ -1,76 +1,204 @@
-# clay-project-template
-Project template to run DDI research experiments.
+# Learnable Moments Pooling
 
-To run experiments, I recommend using the `bocas` package to help keep your code modular, clean, and lean.  This project template shows you how to use `bocas` and use other best practices for development (especially using SMU's Maneframe).  
+![Method Overview](./assets/method_overview.png)
 
-The intent of this repo is to have consistent repos throughout research projects and to make your code more reproducible.  This template should make your life easier by being able to clone and get off the ground running quickly.  A great thing about this template and using `bocas` is that it will autogenerate tables and results for you to compare different configurations.  And you can add these results directly to your papers!
+This is the code for the paper , accepted at ICASSP 2024. This work enables the statistical moment order (e.g., 1=mean, 2=variance, 3=skewness, 4=kurtosis) to be learned from data. This is typically a non-differentiable process. To overcome this limitation, we introduce a continuous relaxation of the moment order. This allows us to learn the moment order from data using gradient descent. We show that this approach outperforms fixed moment order pooling and other learnable moment order pooling methods.
 
-This README is great for getting you started for your next project, but make sure to remove and adjust this README for when you publish your project-specific GitHub repo!  Outside of SMU student's, no one will want to see your Maneframe files and explanations for example.  
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+</head>
+<body>
 
+<table>
+  <tr style="border-bottom: 2pt solid black;">
+    <th>Type</th>
+    <th>Statistics</th>
+    <th>Shared Weights</th>
+    <th>Test Accuracy (%)</th>
+    <th>Peak Accuracy (%)</th>
+    <th># Params (K)</th>
+  </tr>
 
-## Run Setup
+  <tr>
+    <td rowspan="3">Raw</td>
+    <td>[μ]</td>
+    <td>✔</td>
+    <td>62.93</td>
+    <td>97.45</td>
+    <td>200.72</td>
+  </tr>
+  <tr>
+    <td>[U]</td>
+    <td>✔</td>
+    <td><strong>63.15</strong></td>
+    <td><strong>97.82</strong></td>
+    <td>200.721</td>
+  </tr>
+  <tr>
+    <td>[U]</td>
+    <td>—</td>
+    <td>62.94</td>
+    <td>97.65</td>
+    <td>200.828</td>
+  </tr>
 
-In order to use your code as a package, cd into your `/code_package` directory and run:
+  <tr style="background-color: #f2f2f2;">
+    <td rowspan="5">Central</td>
+    <td>[μ, σ²]</td>
+    <td>✔</td>
+    <td>63.54</td>
+    <td><strong>98.80</strong></td>
+    <td>214.544</td>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td>[U, Σ]</td>
+    <td>✔</td>
+    <td>63.67</td>
+    <td>98.77</td>
+    <td>214.548</td>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td>[U, Σ]</td>
+    <td>—</td>
+    <td>63.49</td>
+    <td>98.67</td>
+    <td>214.762</td>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td>[U, σ²]</td>
+    <td>✔</td>
+    <td><strong>63.68</strong></td>
+    <td>98.75</td>
+    <td>214.545</td>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td>[U, σ²]</td>
+    <td>—</td>
+    <td>63.51</td>
+    <td>98.62</td>
+    <td>214.652</td>
+  </tr>
+
+  <tr>
+  <td rowspan="6">Std.</td>
+  <td>[μ, σ², γ]</td>
+  <td>✔</td>
+  <td>62.96</td>
+  <td><strong>98.84</strong></td>
+  <td>228.368</td>
+</tr>
+
+<tr>
+  <td>[μ, σ², γ, κ]</td>
+  <td>✔</td>
+  <td>63.30</td>
+  <td>98.79</td>
+  <td>242.192</td>
+</tr>
+
+<tr>
+  <td>[U, Σ, Γ]</td>
+  <td>✔</td>
+  <td><strong>63.35</strong></td>
+  <td>98.72</td>
+  <td>228.373</td>
+</tr>
+
+<tr>
+  <td>[U, Σ, Γ]</td>
+  <td>—</td>
+  <td>62.76</td>
+  <td>97.68</td>
+  <td>228.694</td>
+</tr>
+
+<tr>
+  <td>[U, σ², γ, κ]</td>
+  <td>✔</td>
+  <td>63.00</td>
+  <td>98.65</td>
+  <td>242.193</td>
+</tr>
+
+<tr style="border-bottom: 2pt solid black;">
+  <td>[U, σ², γ, κ]</td>
+  <td>—</td>
+  <td>62.93</td>
+  <td>98.60</td>
+  <td>242.3</td>
+</tr>
+
+</table>
+*Note: Capital letters denote learnable moments, while lowercase letters denote fixed moments.
+
+## Table of Contents
+
+- [Learnable Moments Pooling](#learnable-moments-pooling)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [With Git](#with-git)
+    - [Manual](#manual)
+  - [Run Experiments](#run-experiments)
+  - [Citation](#citation)
+
+## Installation
+
+### With Git
+
+To install this code, run the following in your environment:
 
 ```bash
+pip install git+https://github.com/caharper/learnable_moments_pooling
+```
+
+### Manual
+
+To install this code manually, clone this repo and run the following in your environment:
+
+```bash
+git clone https://github.com/caharper/learnable_moments_pooling
+cd learnable_moments_pooling
 python setup.py develop
 ```
 
-## Gitignore Setup
-Since this is a project template, I removed some items from the `.gitignore` file so 
-that they are still tracked on this git repo.  To configure `.gitignore` for this 
-project after getting the code on your machine, I recommend adding the following lines 
-to your `.gitignore` file:
+## Run Experiments
+
+We provide our experimental configuration for the RadioML 2018.01A dataset ([download here](https://www.deepsig.ai/datasets/)) under the [./experiments](./experiments/modulation/) directory. To process the data into TFRecord format for optimal performance, we make use of the [smart-tfrecord-writer](https://github.com/caharper/smart-tfrecord-writer/tree/main) package. To convert the dataset into this format, follow the guide [here](https://github.com/caharper/smart-tfrecord-writer/blob/main/examples/radioml/README.md).
+
+Once the dataset is configured, we make use of the [`bocas`](https://github.com/LukeWood/bocas) package to run our experiments. To run the experiments, run the following in your environment:
 
 ```bash
-*playground
+cd experiments/modulation
+python -m bocas.launch run.py --task run.py --config configs/sweep-learned.py
 ```
 
-This is discussed further in [Directory Information](#directory-info).
+Make sure to pass the appropriate configuration file. Our configurations can be found under the [`./experiments/modulation/configs/`](./experiments/modulation/configs/) directory.
 
-If you also plan on using SMU's maneframe to run some experiments, I suggest adding the 
-additional lines to your `.gitignore` file (discussed further in [Use on SMU's Maneframe](#smu-maneframe)):
+## Citation
 
-```bash
-RSYNC_README.md
-*.out
-*.sh
-.superpod_ignore
+If you find this code useful, please cite our paper:
+
+```bibtex
+@inproceedings{harper2024icassp,
+  title={Learnable Statistical Moments Pooling for Automatic Modulation Classification},
+  author={Harper, Clayton and Thornton, Mitchell A and Larson, Eric C},
+  booktitle={ICASSP 2024-2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year={2024},
+  organization={IEEE}
+}
 ```
-
-Once you add to your `/.gitignore` file, for your first commit, run the following to remove these files from your git tracked files.  This way, they will not show up on git anymore.
-
-```bash
-git rm -r --cached .
-git add .
-git commit -m "Removing ignored files"
-git push 
-```
-
-## <a name="directory-info"></a> Directory Information
-
-Outling the directory structure and what each directory is used for.
-
-### Code Package
-
-The `/code_package` directory is where your custom code should go.  Think of this as publishable code for pip installs.  This should be a package (with modules) so that you can load the package into `/experiments` to run your experiments with your custom code!  
-
-NOTE: `/code_package` should be modular and **not experiment specific**.  This code should be reusable for all experiments.  For example, say you have created a custom convolutional layer.  This can be applied on images, audio, etc.  This code goes in `/code_package`.  For one of your experiments, you want to test out your super cool code on audio data.  For this audio task, you come up with a custom model configuration where you stack 2 of your custom layers.  This code **does not** go in `/code_package`.  Since this is specific to the audio task, this code would go in `/experiments/audio`.  More on this [below](#experiments).
-
-### <a name="experiments"></a> Experiments
-
-`/experiments` is where you test out your code on a specific task.  There is a readme in the `/experiments/experiment_a` directory.  Look [there](/experiments/experiment_a/README.md) for more information on how to setup an experiment.
-
-### <a name="playground"></a> Playground
-
-We all make messy code, and we all need a place to run some trial and error testing to get stuff up and running...but no one else wants to see that rat's nest :-).  This is why we have `/playground`!  Add messy jupyter notebooks, scripts, and anything else you may want without subjecting others to the craziness/madness that goes into your programming!  `/code_package`, `/examples`, and `/experiments` should all have production quality code that you can share with others.  `/playground` is exactly what it sounds like, so do what you need to here, but leave it all on your machine!  
-
-Make sure to add `*playground` to your `.gitignore` file after cloning this repo!
-
-### Examples
-
-`/examples` allows you to showcase your custom code to people who are interested in your research.  `/experiments` is great for your publications and making your work reproducible, but `/examples` should be more generic and not for a specific task.  
-
-For example, if you created a custom neural network layer or just made a great python package for people to use, you could create a simple jupyter notebook in `/experiments` to show off your code and how to use it.  
-
-Some people may be interested in the results from your publication.  They would look in `/experiments` for more details.  Other people may look at your publication and want to repurpose your code for their specific task.  `/examples` is a great place to show them how to use your code in a generic sense.

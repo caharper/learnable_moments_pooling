@@ -1,3 +1,8 @@
 .ipynb_checkpoints/
 __pycache__/
 playground/
+shell_scripts/
+.superpod_ignore
+RSYNC_README.md
+*.out
+models/
