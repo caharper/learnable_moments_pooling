@@ -2,9 +2,8 @@
 
 ![Method Overview](./assets/method_overview.png)
 
-This is the code for the paper , accepted at ICASSP 2024. This work enables the statistical moment order (e.g., 1=mean, 2=variance, 3=skewness, 4=kurtosis) to be learned from data. This is typically a non-differentiable process. To overcome this limitation, we introduce a continuous relaxation of the moment order. This allows us to learn the moment order from data using gradient descent. We show that this approach outperforms fixed moment order pooling and other learnable moment order pooling methods.
+This is the code for the paper _Learnable Statistical Moments Pooling for Automatic Modulation Classification_, accepted at ICASSP 2024. This work enables the statistical moment order (e.g., 1=mean, 2=variance, 3=skewness, 4=kurtosis) to be learned from data. This is typically a non-differentiable process. To overcome this limitation, we introduce a continuous relaxation of the moment order. This allows us to learn the moment order from data using gradient descent. We show that this approach outperforms fixed moment order pooling and other learnable moment order pooling methods.
 
-<!-- <!DOCTYPE html> -->
 <html>
 <body>
 
