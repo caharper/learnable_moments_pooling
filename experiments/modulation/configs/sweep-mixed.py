@@ -17,6 +17,6 @@ def get_config():
     config.track_stats = True
 
     # Versioning
-    config.version = "v0.1"
+    config.version = "v0.2"
 
     return config

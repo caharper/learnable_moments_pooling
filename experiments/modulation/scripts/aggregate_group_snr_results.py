@@ -44,7 +44,7 @@ for result in results:
         all_dfs.append(pd.DataFrame(cols, columns=col_heads))
 
 df = pd.concat(all_dfs)
-result = df.to_markdown()
+result = df.to_markdown(index=False)
 
 with open("results/group_snr_metrics.md", "w") as f:
     f.write("# RadioML 2018.01A Group SNR Results\n")

@@ -117,7 +117,6 @@ fig = px.line(
     hover_data=["Type", "Pooling Class", "Shared Weights", "Version"],
     color_discrete_sequence=line_colors,
 )
-fig.write_html("plots/validation_acc_epoch.html")
 fig.write_image("plots/validation_acc_epoch.png", scale=3)
 
 
@@ -209,17 +208,13 @@ models = np.unique(df["Model"])
 
 # Save statistics plots
 fig = make_combined_stat_figure(df, models, line_colors, stat="Mean")
-fig.write_html("plots/val_acc_v_mean.html")
 fig.write_image("plots/val_acc_v_mean.png", scale=3)
 
 fig = make_combined_stat_figure(df, models, line_colors, stat="Variance")
-fig.write_html("plots/val_acc_v_variance.html")
 fig.write_image("plots/val_acc_v_variance.png", scale=3)
 
 fig = make_combined_stat_figure(df, models, line_colors, stat="Skewness")
-fig.write_html("plots/val_acc_v_skewness.html")
 fig.write_image("plots/val_acc_v_skewness.png", scale=3)
 
 fig = make_combined_stat_figure(df, models, line_colors, stat="Kurtosis")
-fig.write_html("plots/val_acc_v_kurtosis.html")
 fig.write_image("plots/val_acc_v_kurtosis.png", scale=3)

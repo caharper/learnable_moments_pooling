@@ -46,7 +46,6 @@ for result in results:
 
 df = pd.concat(all_dfs)
 final_col_order = [
-    "Conv Layers",
     "Pooling Type",
     "Pooling Class",
     "Shared Weights",
@@ -57,7 +56,7 @@ final_col_order = [
     "Version",
 ]
 df = df[final_col_order]
-result = df.to_markdown()
+result = df.to_markdown(index=False)
 
 with open("results/group_macro_metrics.md", "w") as f:
     f.write("# RadioML 2018.01A Group Macro Results\n")

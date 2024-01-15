@@ -34,20 +34,20 @@ for result in results:
 
     col_heads += ["Test Accuracy"]
     test_acc = metrics["acc"]
-    cols += [test_acc]
+    cols += [np.around(test_acc, 4)]
 
     col_heads += ["Max SNR Accuracy"]
     max_acc = metrics["Max SNR Accuracy"]
-    cols += [max_acc]
+    cols += [np.around(max_acc, 4)]
 
     col_heads += ["Validation Accuracy"]
     val_acc = np.array(history["val_acc"])
     best_epoch = np.argmax(val_acc)
-    cols += [val_acc.max()]
+    cols += [np.around(val_acc.max(), 4)]
 
     col_heads += ["Train Accuracy"]
     acc = np.array(history["acc"])[best_epoch]
-    cols += [acc]
+    cols += [np.around(acc, 4)]
 
     col_heads += ["Version"]
     cols += [config.version]
@@ -57,7 +57,6 @@ for result in results:
 
 df = pd.concat(all_dfs)
 final_col_order = [
-    "Conv Layers",
     "Pooling Type",
     "Pooling Class",
     "Shared Weights",
@@ -73,7 +72,7 @@ final_col_order = [
 df = df[final_col_order]
 # Put best performers on the top and worst at the bottom
 df = df.sort_values(by=["Test Accuracy"], ascending=False)
-result = df.to_markdown()
+result = df.to_markdown(index=False)
 
 with open("results/macro_metrics.md", "w") as f:
     f.write("# RadioML 2018.01A Macro Results\n")

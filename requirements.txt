@@ -1,3 +1,10 @@
+bocas==0.0.3
+ml_collections==0.1.1
+numpy==1.24.3
+pandas==2.0.3
+plotly==5.17.0
+setuptools==68.0.0
+tensorflow==2.13.0
+tensorflow_datasets==4.9.2
+termcolor==2.4.0
 tabulate
-bocas
-tensorflow

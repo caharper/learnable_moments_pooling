@@ -1,27 +1,32 @@
-import tensorflow_datasets as tfds
 import tensorflow as tf
-import resource
-
-low, high = resource.getrlimit(resource.RLIMIT_NOFILE)
-resource.setrlimit(resource.RLIMIT_NOFILE, (high, high))
+import tensorflow_datasets as tfds
 
 
-# Create data pipeline
-def prepare_dataset(ds, batch_size=16, augment=True, shuffle=True, deterministic=False):
+@tf.function
+def get_tf_batch(elements, include_snr=False):
+    data = elements["rf_signal"]
+    labels = elements["label"]
+    if include_snr:
+        snrs = elements["snr"]
+        return data, labels, snrs
+
+    return data, labels
+
+
+def prepare_dataset(
+    ds,
+    batch_size=32,
+    include_snr=False,
+    shuffle=True,
+    deterministic=False,
+):
     if shuffle:
-        ds = ds.shuffle(1000, reshuffle_each_iteration=True)
-
-    if augment:
-        ds = ds.map(
-            lambda x, y: (tf.image.random_flip_left_right(x), y),
-            num_parallel_calls=tf.data.AUTOTUNE,
-            deterministic=deterministic,
-        )
+        ds = ds.shuffle(batch_size * 4, reshuffle_each_iteration=True)
 
     ds = (
         ds.batch(batch_size)
         .map(
-            lambda x, y: (tf.cast(x, tf.float32) / 255.0, y),
+            lambda x: get_tf_batch(x, include_snr=include_snr),
             num_parallel_calls=tf.data.AUTOTUNE,
             deterministic=deterministic,
         )
@@ -31,27 +36,30 @@ def prepare_dataset(ds, batch_size=16, augment=True, shuffle=True, deterministic
     return ds
 
 
-def load(split, batch_size, augment, data_dir, return_info=False):
-    if split not in ["train", "validation", "test"]:
-        raise ValueError(
-            f"expected split to be train, validation, or test, got {split}."
-        )
+def load(
+    dataset_path,
+    split,
+    batch_size,
+    include_snr,
+    deterministic=False,
+    take=None,
+    shuffle=True,
+):
+    # No validation set with the current configuration
+    if split not in ["train", "test"]:
+        raise ValueError(f"expected split to be train, test, got {split}.")
 
-    dataset, info = tfds.load(
-        "cifar10",
-        split=split,
-        as_supervised=True,
-        with_info=True,
-        data_dir=data_dir,
-    )
+    ds = tfds.load("radio_ml_2018.01", data_dir=dataset_path, split=split)
 
     ds = prepare_dataset(
-        dataset,
+        ds,
         batch_size=batch_size,
-        augment=augment,
-        shuffle=split == "train",
+        include_snr=include_snr,
+        shuffle=shuffle,
+        deterministic=deterministic,
     )
 
-    if return_info:
-        return ds, info
+    if take:
+        ds = ds.take(take)
+
     return ds

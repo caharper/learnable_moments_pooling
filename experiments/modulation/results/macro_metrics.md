@@ -1,0 +1,17 @@
+# RadioML 2018.01A Macro Results
+| Pooling Type   | Pooling Class          | Shared Weights   |   Test Accuracy |   Max SNR Accuracy |   Train Accuracy |   Validation Accuracy |   Batch Size |   Max Epochs |   Used Epochs | Version   |
+|:---------------|:-----------------------|:-----------------|----------------:|-------------------:|-----------------:|----------------------:|-------------:|-------------:|--------------:|:----------|
+| Mixed          | mixed-xvector          | True             |          0.6368 |             0.9875 |           0.6409 |                0.6379 |          128 |          100 |           100 | v0.2      |
+| Learned        | learned-int-xvector    | True             |          0.6367 |             0.9877 |           0.6403 |                0.6374 |          128 |          100 |           100 | v0.2      |
+| Fixed          | xvector                | True             |          0.6354 |             0.988  |           0.6405 |                0.6363 |          128 |          100 |           100 | v0.2      |
+| Mixed          | mixed-xvector          | False            |          0.6351 |             0.9862 |           0.6405 |                0.6363 |          128 |          100 |           100 | v0.2      |
+| Learned        | learned-int-xvector    | False            |          0.6349 |             0.9867 |           0.64   |                0.6356 |          128 |          100 |           100 | v0.2      |
+| Learned        | learned-int-hom-vector | True             |          0.6335 |             0.9872 |           0.6442 |                0.6363 |          128 |          100 |           100 | v0.2      |
+| Fixed          | kurtosisvector         | True             |          0.633  |             0.9879 |           0.6431 |                0.6347 |          128 |          100 |           100 | v0.2      |
+| Learned        | learned-raw            | True             |          0.6315 |             0.9782 |           0.6355 |                0.6316 |          128 |          100 |           100 | v0.2      |
+| Mixed          | mixed-hom-vector       | True             |          0.63   |             0.9865 |           0.645  |                0.6336 |          128 |          100 |           100 | v0.2      |
+| Fixed          | skewvector             | True             |          0.6296 |             0.9884 |           0.6489 |                0.6311 |          128 |          100 |           100 | v0.2      |
+| Learned        | learned-raw            | False            |          0.6294 |             0.9765 |           0.6349 |                0.6314 |          128 |          100 |           100 | v0.2      |
+| Fixed          | dvector                | True             |          0.6293 |             0.9745 |           0.6347 |                0.6311 |          128 |          100 |           100 | v0.2      |
+| Mixed          | mixed-hom-vector       | False            |          0.6293 |             0.986  |           0.6426 |                0.632  |          128 |          100 |           100 | v0.2      |
+| Learned        | learned-int-hom-vector | False            |          0.6276 |             0.9768 |           0.6411 |                0.6357 |          128 |          100 |           100 | v0.2      |

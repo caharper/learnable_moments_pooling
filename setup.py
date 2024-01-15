@@ -8,6 +8,8 @@ import pathlib
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
+with open("requirements.txt") as f:
+    requirements = f.read().splitlines()
 
 setup(
     name="learnable_moments_pooling",
@@ -17,7 +19,7 @@ setup(
     url="https://github.com/caharper/learnable_moments_pooling",
     author="Clayton Harper",
     author_email="caharper@smu.edu",
-    install_requires=[],
+    install_requires=requirements,
     extras_require={},
     python_requires=">=3.7",
     distclass=Distribution,
