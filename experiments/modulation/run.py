@@ -158,7 +158,7 @@ def run(config):
         tf.keras.callbacks.ReduceLROnPlateau(
             monitor=monitor,
             factor=0.1,
-            patience=8,
+            patience=7,
             min_lr=1e-7,
             mode="min",
             min_delta=1e-3,
