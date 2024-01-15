@@ -144,7 +144,10 @@ This is the code for the paper , accepted at ICASSP 2024. This work enables the 
 </tr>
 
 </table>
-*Note: Capital letters denote learnable moments, while lowercase letters denote fixed moments.
+</body>
+</html>
+
+\*Note: Capital letters denote learnable moments, while lowercase letters denote fixed moments.
 
 ## Table of Contents
 
