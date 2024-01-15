@@ -160,7 +160,7 @@ To install this code manually, clone this repo and run the following in your env
 ```bash
 git clone https://github.com/caharper/learnable_moments_pooling
 cd learnable_moments_pooling
-python setup.py develop
+python setup.py install
 ```
 
 ## Run Experiments
